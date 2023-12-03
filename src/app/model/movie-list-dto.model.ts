@@ -1,4 +1,3 @@
-import { NumberInput } from '@angular/cdk/coercion';
 import { Movie } from './movie.model';
 import { Pageable } from './pageable.model';
 import { Sort } from './sort.model';
@@ -10,9 +9,9 @@ export interface MovieListDto {
   empty: boolean;
   first: boolean;
   last: boolean;
-  number: Number;
-  numberOfElements: Number;
-  size: Number;
-  totalElements: Number;
-  totalPages: NumberInput;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  totalElements: number;
+  totalPages: number;
 }

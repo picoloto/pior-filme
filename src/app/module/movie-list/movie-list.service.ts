@@ -17,7 +17,7 @@ export class MovieListService {
     year?: Number
   ): Observable<any> {
     const pagePath: String = `?page=${page}`;
-    const sizePath: String = `&size=15`;
+    const sizePath: String = `&size=10`;
     const yearPath: String = year ? `&year=${year}` : '';
     let winnerPath: String = '';
 

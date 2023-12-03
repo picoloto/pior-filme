@@ -8,9 +8,9 @@
     <mat-form-field>
       <mat-label>Listar filmes</mat-label>
       <mat-select
-        [(value)]="selectedFood"
+        [(value)]="initialWinnerFilter"
         (selectionChange)="winnerFilterChange($event)">
-        @for (option of foods; track option) {
+        @for (option of winnerFilterOptions; track option) {
         <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
         }
       </mat-select>
@@ -49,11 +49,13 @@
   </table>
 
   <mat-paginator
-    [hidePageSize]="true"
+    [hidePageSize]="paginator.hidePageSize"
     showFirstLastButtons
-    [pageSize]="movieListDto?.pageable?.pageSize ?? 0"
-    [pageIndex]="movieListDto?.pageable?.pageNumber ?? 0"
-    [length]="movieListDto?.totalPages ?? 0"
+    [pageSize]="paginator.pageSize"
+    [pageIndex]="paginator.pageIndex"
+    [length]="paginator.length"
+    (page)="handlePageEvent($event)"
+    [disabled]="false"
     aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>

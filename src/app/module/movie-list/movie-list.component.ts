@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,11 +16,7 @@ import { MovieListService } from './movie-list.service';
 import { MovieListDto } from '../../model/movie-list-dto.model';
 import { Movie } from '../../model/movie.model';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
-
-interface Winner {
-  value: FilterWinner;
-  viewValue: string;
-}
+import { Paginator } from '../../model/paginator.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -37,31 +33,80 @@ interface Winner {
   styleUrl: './movie-list.component.scss',
 })
 export class MovieListComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // HTML Elements
   @ViewChild('yearFilterInput') yearFilterInput!: ElementRef;
 
+  // Table
   displayedColumns: string[] = ['id', 'year', 'title', 'winner'];
 
-  foods: Winner[] = [
+  // Select options
+  winnerFilterOptions = [
     { value: FilterWinner.ALL, viewValue: FilterWinner.ALL },
     { value: FilterWinner.WINNER, viewValue: FilterWinner.WINNER },
     { value: FilterWinner.INDICATED, viewValue: FilterWinner.INDICATED },
   ];
-  selectedFood = this.foods[0].value;
+  initialWinnerFilter = this.winnerFilterOptions[0].value;
 
+  // Filter
+  filterYear?: Number;
+  filterWinner: FilterWinner = FilterWinner.ALL;
+
+  // API Data
   movieListDto?: MovieListDto;
   movieList: Movie[] = [];
 
-  constructor(
-    private movieListService: MovieListService,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+  // Paginator
+  paginator: Paginator = new Paginator();
+
+  constructor(private movieListService: MovieListService) {}
 
   ngOnInit(): void {
-    this.getMovieList({});
+    this.getMovieList();
   }
 
   ngAfterViewInit() {
+    this.applyYearFilter();
+  }
+
+  winnerFilterChange(event: MatSelectChange) {
+    const filter: FilterWinner = event.value as FilterWinner;
+    this.filterWinner = filter;
+    this.paginator.pageIndex = 0;
+
+    this.getMovieList();
+  }
+
+  // TODO:
+  // Falta os testes unitarios
+  // Falta limpar o código
+  // Falta responsividade
+
+  getMovieList() {
+    this.movieListService
+      .getListMovies(
+        this.paginator.pageIndex,
+        this.filterWinner,
+        this.filterYear
+      )
+      .subscribe((data: MovieListDto) => {
+        console.log(data, 'data');
+        this.movieListDto = data;
+        this.movieList = [...this.movieListDto.content];
+        this.setPaginatorParameters();
+      });
+  }
+
+  setPaginatorParameters(): void {
+    this.paginator.length = this.movieListDto?.totalElements ?? 0;
+    this.paginator.pageSize = this.movieListDto?.size ?? 0;
+  }
+
+  handlePageEvent(e: PageEvent) {
+    this.paginator.pageIndex = e.pageIndex;
+    this.getMovieList();
+  }
+
+  applyYearFilter(): void {
     fromEvent(this.yearFilterInput.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),
@@ -69,29 +114,8 @@ export class MovieListComponent implements OnInit, AfterViewInit {
         distinctUntilChanged()
       )
       .subscribe((res) => {
-        this.getMovieList({ year: res.length === 4 ? res : undefined });
-      });
-  }
-
-  winnerFilterChange(event: MatSelectChange) {
-    const filter: FilterWinner = event.value as FilterWinner;
-
-    this.getMovieList({ winner: filter });
-  }
-
-  // TODO:
-  // Falta fazer os filtros funcionarem juntos (criar scope)
-  // Falta arrumar a paginacao
-  // Falta os testes unitarios
-  // Falta limpar o código
-
-  getMovieList(optionals: { year?: Number; winner?: FilterWinner }) {
-    this.movieListService
-      .getListMovies(0, optionals.winner ?? FilterWinner.ALL, optionals.year)
-      .subscribe((data: MovieListDto) => {
-        console.log(data, 'data');
-        this.movieListDto = data;
-        this.movieList = [...this.movieListDto.content];
+        this.filterYear = res.length === 4 ? res : undefined;
+        this.getMovieList();
       });
   }
 }
