@@ -1,22 +1,22 @@
+<div class="flex-row">
+  <mat-form-field>
+    <mat-label>Buscar por ano</mat-label>
+    <input matInput placeholder="Ex. 1998" #yearFilterInput />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Listar filmes</mat-label>
+    <mat-select
+      [(value)]="initialWinnerFilter"
+      (selectionChange)="winnerFilterChange($event)">
+      @for (option of winnerFilterOptions; track option) {
+      <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</div>
+
 <div class="mat-elevation-z2">
-  <div class="flex-row">
-    <mat-form-field>
-      <mat-label>Buscar por ano</mat-label>
-      <input matInput placeholder="Ex. 1998" #yearFilterInput />
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Listar filmes</mat-label>
-      <mat-select
-        [(value)]="initialWinnerFilter"
-        (selectionChange)="winnerFilterChange($event)">
-        @for (option of winnerFilterOptions; track option) {
-        <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-  </div>
-
   <table mat-table [dataSource]="movieList">
     <!-- id Column -->
     <ng-container matColumnDef="id">

@@ -1,0 +1,19 @@
+<mat-drawer-container autosize>
+  <mat-drawer
+    #drawer
+    [opened]="menuOpened"
+    class="menu"
+    [mode]="isMobile ? 'over' : 'side'">
+    <mat-list role="list">
+      @for (option of menuItens; track option) {
+      <a mat-list-item [routerLink]="option.route">
+        <span mat-line>{{ option.title }}</span>
+      </a>
+      }
+    </mat-list>
+  </mat-drawer>
+
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>
