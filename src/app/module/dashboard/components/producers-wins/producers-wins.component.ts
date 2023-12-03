@@ -27,7 +27,6 @@ export class ProducersWinsComponent {
     this.movieService
       .getMinMaxWinProducers()
       .subscribe((data: MaxMinWinProducersDto) => {
-        console.log(data, 'data');
         this.producerMaxInterval = data.max;
         this.producerMinInterval = data.min;
       });

@@ -40,7 +40,6 @@ export class MovieWinnersComponent implements OnInit {
     this.movieService
       .getMovieWinnerByYear(filter ?? 2015)
       .subscribe((data: Movie[]) => {
-        console.log(data, 'data');
         this.movieWinnerListByYear = data;
       });
   }

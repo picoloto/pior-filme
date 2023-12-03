@@ -54,7 +54,6 @@ export class MovieListComponent implements OnInit {
         this.yearFilter
       )
       .subscribe((data: MovieListDto) => {
-        console.log(data, 'data');
         this.movieListDto = data;
         this.movieList = [...this.movieListDto.content];
         this.setPaginatorParameters();

@@ -27,7 +27,6 @@ export class MultipleWinnersComponent implements OnInit {
       .getMultipleWinners()
       .pipe(map((data) => data.years))
       .subscribe((data: YearWinnerCount[]) => {
-        console.log(data, 'data');
         this.yearWinnerCount = data;
       });
   }

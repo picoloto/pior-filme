@@ -1,9 +1,14 @@
+<app-header
+  [isMobile]="isMobile"
+  (changeMenuStatus)="changeMenuStatus()"></app-header>
+
 <mat-drawer-container autosize>
   <mat-drawer
     #drawer
     [opened]="menuOpened"
     class="menu"
-    [mode]="isMobile ? 'over' : 'side'">
+    [mode]="isMobile ? 'over' : 'side'"
+    (closedStart)="closeMenu()">
     <mat-list role="list">
       @for (option of menuItens; track option) {
       <a mat-list-item [routerLink]="option.route">
