@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MovieListComponent } from './movie-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { MovieService } from '../../shared/service/movie.service';
+import { MovieService } from '../../shared/services/movie.service';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;

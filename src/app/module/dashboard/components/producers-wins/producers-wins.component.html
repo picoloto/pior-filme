@@ -1,41 +1,10 @@
-<h1>Producers with longest and shortest interval between wins</h1>
-<!-- <table mat-table [dataSource]="movieList"> -->
-<!-- id Column -->
-<!-- <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container> -->
+<h1>Produtores com o maior e o menor intervalo entre vitórias</h1>
+<h2>Maior intervalo</h2>
+<app-producer-wins-table
+  [dataSource]="producerMaxInterval"></app-producer-wins-table>
 
-<!-- year Column -->
-<!-- <ng-container matColumnDef="year">
-      <th mat-header-cell *matHeaderCellDef>Ano</th>
-      <td mat-cell *matCellDef="let element">{{ element.year }}</td>
-    </ng-container> -->
+<br />
 
-<!-- title Column -->
-<!-- <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef>Titulo</th>
-      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-    </ng-container> -->
-
-<!-- winner Column -->
-<!-- <ng-container matColumnDef="winner">
-      <th mat-header-cell *matHeaderCellDef>Vencedor</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.winner ? 'Sim' : 'Não' }}
-      </td>
-    </ng-container> -->
-
-<!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table> -->
-
-<!-- <mat-paginator
-    [hidePageSize]="paginator.hidePageSize"
-    showFirstLastButtons
-    [pageSize]="paginator.pageSize"
-    [pageIndex]="paginator.pageIndex"
-    [length]="paginator.length"
-    (page)="handlePageEvent($event)"
-    aria-label="Select page of periodic elements">
-  </mat-paginator> -->
+<h2>Menor intervalo</h2>
+<app-producer-wins-table
+  [dataSource]="producerMinInterval"></app-producer-wins-table>

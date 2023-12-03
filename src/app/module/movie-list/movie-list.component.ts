@@ -1,21 +1,13 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { FilterWinner } from '../../shared/enum/filter-winner.enum';
-import { MovieService } from '../../shared/service/movie.service';
+import { FilterWinner } from '../../shared/enums/filter-winner.enum';
+import { MovieService } from '../../shared/services/movie.service';
 import { MovieListDto } from '../../model/movie-list-dto.model';
 import { Movie } from '../../model/movie.model';
-import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { Paginator } from '../../model/paginator.model';
+import { YearFilterComponent } from '../../shared/components/year-filter/year-filter.component';
 
 @Component({
   selector: 'app-movie-list',
@@ -23,18 +15,14 @@ import { Paginator } from '../../model/paginator.model';
   imports: [
     MatTableModule,
     MatPaginatorModule,
-    MatInputModule,
-    MatFormFieldModule,
     MatSelectModule,
+    YearFilterComponent,
   ],
   providers: [MovieService],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })
-export class MovieListComponent implements OnInit, AfterViewInit {
-  // HTML Elements
-  @ViewChild('yearFilterInput') yearFilterInput!: ElementRef;
-
+export class MovieListComponent implements OnInit {
   // Table
   displayedColumns: string[] = ['id', 'year', 'title', 'winner'];
 
@@ -47,7 +35,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   initialWinnerFilter = this.winnerFilterOptions[0].value;
 
   // Filter
-  filterYear?: Number;
+  yearFilter?: Number;
   filterWinner: FilterWinner = FilterWinner.ALL;
 
   // API Data
@@ -57,30 +45,18 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   // Paginator
   paginator: Paginator = new Paginator();
 
-  constructor(private movieListService: MovieService) {}
+  constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
-    this.getMovieList();
-  }
-
-  ngAfterViewInit() {
     this.applyYearFilter();
   }
 
-  winnerFilterChange(event: MatSelectChange) {
-    const filter: FilterWinner = event.value as FilterWinner;
-    this.filterWinner = filter;
-    this.paginator.pageIndex = 0;
-
-    this.getMovieList();
-  }
-
   getMovieList() {
-    this.movieListService
+    this.movieService
       .getListMovies(
         this.paginator.pageIndex,
         this.filterWinner,
-        this.filterYear
+        this.yearFilter
       )
       .subscribe((data: MovieListDto) => {
         console.log(data, 'data');
@@ -100,16 +76,16 @@ export class MovieListComponent implements OnInit, AfterViewInit {
     this.getMovieList();
   }
 
-  applyYearFilter(): void {
-    fromEvent(this.yearFilterInput.nativeElement, 'keyup')
-      .pipe(
-        map((event: any) => event.target.value),
-        debounceTime(500),
-        distinctUntilChanged()
-      )
-      .subscribe((res) => {
-        this.filterYear = res.length === 4 ? res : undefined;
-        this.getMovieList();
-      });
+  applyYearFilter(filter?: number | undefined): void {
+    this.yearFilter = filter?.toString().length === 4 ? filter : undefined;
+    this.getMovieList();
+  }
+
+  winnerFilterChange(event: MatSelectChange) {
+    const filter: FilterWinner = event.value as FilterWinner;
+    this.filterWinner = filter;
+    this.paginator.pageIndex = 0;
+
+    this.getMovieList();
   }
 }
