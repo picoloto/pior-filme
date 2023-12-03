@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<app-header
+  [isMobile]="isMobile"
+  (changeMenuStatus)="changeMenuStatus()"></app-header>
+<app-sidebar [isMobile]="isMobile" [menuOpened]="menuOpened">
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</app-sidebar>
