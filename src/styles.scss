@@ -6,6 +6,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex{
   display: flex;
   gap: 10px;
+  flex-wrap: wrap;
 
   &-column{
     @extend .flex;
@@ -16,4 +17,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     @extend .flex;
     flex-direction: row;
   }
+}
+
+.table-container {
+  padding: 16px;
+  background-color: white;
+  border-radius: 4px;
+  flex: 1;
 }

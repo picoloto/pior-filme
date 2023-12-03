@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MovieListComponent } from './module/movie-list/view/movie-list.component';
-import { DashboardComponent } from './module/dashboard/view/dashboard.component';
+import { MovieListComponent } from './module/movie-list/movie-list.component';
+import { DashboardComponent } from './module/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
