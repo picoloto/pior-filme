@@ -76,11 +76,6 @@ export class MovieListComponent implements OnInit, AfterViewInit {
     this.getMovieList();
   }
 
-  // TODO:
-  // Falta os testes unitarios
-  // Falta limpar o código
-  // Falta responsividade
-
   getMovieList() {
     this.movieListService
       .getListMovies(
