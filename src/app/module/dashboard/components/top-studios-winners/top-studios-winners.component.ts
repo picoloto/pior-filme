@@ -28,7 +28,6 @@ export class TopStudiosWinnersComponent {
       .getTopStudiosWinners()
       .pipe(map((data) => data.studios.slice(0, 3)))
       .subscribe((data: StudioWinnerCount[]) => {
-        console.log(data, 'data');
         this.studioWinnerCount = data;
       });
   }
