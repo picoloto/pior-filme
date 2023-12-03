@@ -1,0 +1,59 @@
+<div class="mat-elevation-z2">
+  <div class="flex-row">
+    <mat-form-field>
+      <mat-label>Buscar por ano</mat-label>
+      <input matInput placeholder="Ex. 1998" #yearFilterInput />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Listar filmes</mat-label>
+      <mat-select
+        [(value)]="selectedFood"
+        (selectionChange)="winnerFilterChange($event)">
+        @for (option of foods; track option) {
+        <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <table mat-table [dataSource]="movieList">
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- year Column -->
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef>Ano</th>
+      <td mat-cell *matCellDef="let element">{{ element.year }}</td>
+    </ng-container>
+
+    <!-- title Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Titulo</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+
+    <!-- winner Column -->
+    <ng-container matColumnDef="winner">
+      <th mat-header-cell *matHeaderCellDef>Vencedor</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.winner ? 'Sim' : 'Não' }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [hidePageSize]="true"
+    showFirstLastButtons
+    [pageSize]="movieListDto?.pageable?.pageSize ?? 0"
+    [pageIndex]="movieListDto?.pageable?.pageNumber ?? 0"
+    [length]="movieListDto?.totalPages ?? 0"
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
