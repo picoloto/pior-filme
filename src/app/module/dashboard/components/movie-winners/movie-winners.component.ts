@@ -26,10 +26,6 @@ import { YearFilterComponent } from '../../../../shared/components/year-filter/y
   styleUrl: './movie-winners.component.scss',
 })
 export class MovieWinnersComponent implements OnInit {
-  // HTML Elements
-  @ViewChild('yearFilterInput') yearFilterInput!: ElementRef;
-
-  // Table
   displayedColumns: string[] = ['id', 'year', 'title'];
 
   movieWinnerListByYear: Movie[] = [];

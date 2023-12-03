@@ -18,7 +18,6 @@ import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
   styleUrl: './year-filter.component.scss',
 })
 export class YearFilterComponent implements AfterViewInit {
-  // HTML Elements
   @ViewChild('yearFilterInput') yearFilterInput!: ElementRef;
   @Output() filterKeyUpEvent = new EventEmitter<number>();
 
