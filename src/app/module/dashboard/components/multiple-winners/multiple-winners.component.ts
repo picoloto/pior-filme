@@ -12,7 +12,6 @@ import { map } from 'rxjs';
   styleUrl: './multiple-winners.component.scss',
 })
 export class MultipleWinnersComponent implements OnInit {
-  // Table
   displayedColumns: string[] = ['year', 'winCount'];
 
   yearWinnerCount: YearWinnerCount[] = [];

@@ -23,10 +23,8 @@ import { YearFilterComponent } from '../../shared/components/year-filter/year-fi
   styleUrl: './movie-list.component.scss',
 })
 export class MovieListComponent implements OnInit {
-  // Table
   displayedColumns: string[] = ['id', 'year', 'title', 'winner'];
 
-  // Select options
   winnerFilterOptions = [
     { value: FilterWinner.ALL, viewValue: FilterWinner.ALL },
     { value: FilterWinner.WINNER, viewValue: FilterWinner.WINNER },
@@ -34,15 +32,12 @@ export class MovieListComponent implements OnInit {
   ];
   initialWinnerFilter = this.winnerFilterOptions[0].value;
 
-  // Filter
   yearFilter?: Number;
   filterWinner: FilterWinner = FilterWinner.ALL;
 
-  // API Data
   movieListDto?: MovieListDto;
   movieList: Movie[] = [];
 
-  // Paginator
   paginator: Paginator = new Paginator();
 
   constructor(private movieService: MovieService) {}

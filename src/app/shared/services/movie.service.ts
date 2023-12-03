@@ -24,18 +24,7 @@ export class MovieService {
     const pagePath: String = `?page=${page}`;
     const sizePath: String = `&size=10`;
     const yearPath: String = year ? `&year=${year}` : '';
-    let winnerPath: String = '';
-
-    switch (filterWinner) {
-      case FilterWinner.INDICATED:
-        winnerPath = `&winner=false`;
-        break;
-      case FilterWinner.WINNER:
-        winnerPath = `&winner=true`;
-        break;
-      default:
-        break;
-    }
+    const winnerPath: String = this.getWinnerPath(filterWinner);
 
     return this.httpClient.get<MovieListDto>(
       `${environment.apiUrl}${pagePath}${sizePath}${winnerPath}${yearPath}`
@@ -61,8 +50,22 @@ export class MovieService {
   }
 
   getMovieWinnerByYear(year: number): Observable<Movie[]> {
+    const winnerPath: String = `?winner=true`;
+    const yearPath: String = `&year=${year}`;
+
     return this.httpClient.get<Movie[]>(
-      `${environment.apiUrl}?winner=true&year=${year}`
+      `${environment.apiUrl}${winnerPath}${yearPath}`
     );
+  }
+
+  private getWinnerPath(filterWinner: FilterWinner): String {
+    switch (filterWinner) {
+      case FilterWinner.INDICATED:
+        return `&winner=false`;
+      case FilterWinner.WINNER:
+        return `&winner=true`;
+      default:
+        return '';
+    }
   }
 }

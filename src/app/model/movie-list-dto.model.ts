@@ -1,6 +1,5 @@
 import { Movie } from './movie.model';
-import { Pageable } from './pageable.model';
-import { Sort } from './sort.model';
+import { Pageable, Sort } from './paginator.model';
 
 export interface MovieListDto {
   content: Movie[];

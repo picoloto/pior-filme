@@ -13,7 +13,6 @@ import { map } from 'rxjs';
   styleUrl: './top-studios-winners.component.scss',
 })
 export class TopStudiosWinnersComponent {
-  // Table
   displayedColumns: string[] = ['name', 'winCount'];
 
   studioWinnerCount: StudioWinnerCount[] = [];

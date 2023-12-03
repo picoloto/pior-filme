@@ -10,7 +10,6 @@ import { ProducerInterval } from '../../../../../../model/max-min-win-producers-
   styleUrl: './producer-wins-table.component.scss',
 })
 export class ProducerWinsTableComponent {
-  // Table
   displayedColumns: string[] = [
     'producer',
     'interval',
