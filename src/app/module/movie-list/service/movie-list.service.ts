@@ -1,9 +1,9 @@
-import { FilterWinner } from './../../shared/enum/filter-winner.enum';
+import { FilterWinner } from '../../../shared/enum/filter-winner.enum';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../shared/environment/envrironment';
+import { environment } from '../../../shared/environment/envrironment';
 import { Observable } from 'rxjs';
-import { MovieListDto } from '../../model/movie-list-dto.model';
+import { MovieListDto } from '../../../model/movie-list-dto.model';
 
 @Injectable({
   providedIn: 'root',

@@ -11,12 +11,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { FilterWinner } from '../../shared/enum/filter-winner.enum';
-import { MovieListService } from './movie-list.service';
-import { MovieListDto } from '../../model/movie-list-dto.model';
-import { Movie } from '../../model/movie.model';
+import { FilterWinner } from '../../../shared/enum/filter-winner.enum';
+import { MovieListService } from '../service/movie-list.service';
+import { MovieListDto } from '../../../model/movie-list-dto.model';
+import { Movie } from '../../../model/movie.model';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
-import { Paginator } from '../../model/paginator.model';
+import { Paginator } from '../../../model/paginator.model';
 
 @Component({
   selector: 'app-movie-list',

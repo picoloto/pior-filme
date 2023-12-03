@@ -4,4 +4,5 @@ export interface Movie {
   title: String;
   studios: String[];
   producers: String[];
+  winner?: boolean;
 }
