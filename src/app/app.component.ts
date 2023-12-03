@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -24,11 +24,15 @@ export class AppComponent implements OnInit {
   isMobile = false;
   menuOpened = true;
 
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
+
   ngOnInit() {
-    window.onresize = (e) => {
+    if (isPlatformBrowser(this.platformId)) {
+      window.onresize = (e) => {
+        this.checkMenu();
+      };
       this.checkMenu();
-    };
-    this.checkMenu();
+    }
   }
 
   checkMenu() {

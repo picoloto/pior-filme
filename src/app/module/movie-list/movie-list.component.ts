@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   OnInit,
@@ -11,12 +10,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
-import { FilterWinner } from '../../../shared/enum/filter-winner.enum';
-import { MovieListService } from '../service/movie-list.service';
-import { MovieListDto } from '../../../model/movie-list-dto.model';
-import { Movie } from '../../../model/movie.model';
+import { FilterWinner } from '../../shared/enum/filter-winner.enum';
+import { MovieService } from '../../shared/service/movie.service';
+import { MovieListDto } from '../../model/movie-list-dto.model';
+import { Movie } from '../../model/movie.model';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
-import { Paginator } from '../../../model/paginator.model';
+import { Paginator } from '../../model/paginator.model';
 
 @Component({
   selector: 'app-movie-list',
@@ -28,7 +27,7 @@ import { Paginator } from '../../../model/paginator.model';
     MatFormFieldModule,
     MatSelectModule,
   ],
-  providers: [MovieListService],
+  providers: [MovieService],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })
@@ -58,7 +57,7 @@ export class MovieListComponent implements OnInit, AfterViewInit {
   // Paginator
   paginator: Paginator = new Paginator();
 
-  constructor(private movieListService: MovieListService) {}
+  constructor(private movieListService: MovieService) {}
 
   ngOnInit(): void {
     this.getMovieList();

@@ -2,12 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MovieListComponent } from './movie-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { MovieListService } from '../service/movie-list.service';
+import { MovieService } from '../../shared/service/movie.service';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;
   let fixture: ComponentFixture<MovieListComponent>;
-  let movieListService: MovieListService;
+  let movieListService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -17,7 +17,7 @@ describe('MovieListComponent', () => {
     fixture = TestBed.createComponent(MovieListComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieListService);
+    movieListService = TestBed.inject(MovieService);
   });
 
   it('should create the MovieListComponent', () => {
