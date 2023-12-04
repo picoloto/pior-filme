@@ -49,7 +49,7 @@ describe('StructureComponent', () => {
     expect(component.menuOpened).toBeTrue();
   });
 
-  it('ngOnInit() must prepare for trigger onResize method when window is resized', () => {
+  it('ngOnInit() must prepare for trigger onResize event when window is resized', () => {
     const spyOnResize = spyOn(component, 'ngOnInit');
     component.ngOnInit();
     window.dispatchEvent(new Event('resize'));
