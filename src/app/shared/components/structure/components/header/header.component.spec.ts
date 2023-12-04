@@ -8,10 +8,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HeaderComponent]
-    })
-    .compileComponents();
-    
+      imports: [HeaderComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +18,11 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('menuClick() should emit on click', () => {
+    spyOn(component.changeMenuStatus, 'emit');
+    component.menuClick();
+    expect(component.changeMenuStatus.emit).toHaveBeenCalled();
   });
 });

@@ -6,7 +6,7 @@
     <mat-label>Listar filmes</mat-label>
     <mat-select
       [(value)]="initialWinnerFilter"
-      (selectionChange)="winnerFilterChange($event)">
+      (selectionChange)="winnerFilterChange($event.value)">
       @for (option of winnerFilterOptions; track option) {
       <mat-option [value]="option.value">{{ option.viewValue }}</mat-option>
       }

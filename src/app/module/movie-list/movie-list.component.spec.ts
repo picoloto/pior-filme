@@ -1,143 +1,101 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MovieListComponent } from './movie-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MovieService } from '../../shared/services/movie.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FilterWinner } from '../../shared/enums/filter-winner.enum';
+import { Paginator } from '../../model/paginator.model';
+import { PageEvent } from '@angular/material/paginator';
+import { of } from 'rxjs';
+import { Movie_List_Dto_Mock } from '../../shared/mocks/movie-list-dto.mock';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;
   let fixture: ComponentFixture<MovieListComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MovieListComponent, HttpClientTestingModule],
+      imports: [
+        MovieListComponent,
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MovieListComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
+    fixture.detectChanges();
   });
 
   it('should create the MovieListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set the paginator parameters', () => {
-    component.movieListDto = {
-      content: [
-        {
-          id: 11,
-          year: 1981,
-          title: 'Mommie Dearest',
-          studios: ['Paramount Pictures'],
-          producers: ['Frank Yablans'],
-          winner: true,
-        },
-        {
-          id: 12,
-          year: 1981,
-          title: 'Endless Love',
-          studios: ['PolyGram', 'Universal Studios'],
-          producers: ['Dyson Lovell'],
-          winner: false,
-        },
-        {
-          id: 13,
-          year: 1981,
-          title: "Heaven's Gate",
-          studios: ['United Artists'],
-          producers: ['Joann Carelli'],
-          winner: false,
-        },
-        {
-          id: 14,
-          year: 1981,
-          title: 'The Legend of the Lone Ranger',
-          studios: ['Associated Film Distribution', 'Universal Studios'],
-          producers: ['Walter Coblenz'],
-          winner: false,
-        },
-        {
-          id: 15,
-          year: 1981,
-          title: 'Tarzan, the Ape Man',
-          studios: ['MGM', 'United Artists'],
-          producers: ['John Derek'],
-          winner: false,
-        },
-        {
-          id: 16,
-          year: 1982,
-          title: 'Inchon',
-          studios: ['MGM'],
-          producers: ['Mitsuharu Ishii'],
-          winner: true,
-        },
-        {
-          id: 17,
-          year: 1982,
-          title: 'Annie',
-          studios: ['Columbia Pictures'],
-          producers: ['Ray Stark'],
-          winner: false,
-        },
-        {
-          id: 18,
-          year: 1982,
-          title: 'Butterfly',
-          studios: ['Analysis Film Releasing'],
-          producers: ['Matt Cimber'],
-          winner: false,
-        },
-        {
-          id: 19,
-          year: 1982,
-          title: 'Megaforce',
-          studios: ['20th Century Fox'],
-          producers: ['Albert S. Ruddy'],
-          winner: false,
-        },
-        {
-          id: 20,
-          year: 1982,
-          title: 'The Pirate Movie',
-          studios: ['20th Century Fox'],
-          producers: ['David Joseph'],
-          winner: false,
-        },
-      ],
-      pageable: {
-        sort: {
-          unsorted: true,
-          sorted: false,
-          empty: true,
-        },
-        offset: 10,
-        pageSize: 10,
-        pageNumber: 1,
-        unpaged: false,
-        paged: true,
-      },
-      last: false,
-      totalPages: 21,
-      totalElements: 206,
-      size: 10,
-      number: 1,
-      sort: {
-        unsorted: true,
-        sorted: false,
-        empty: true,
-      },
-      first: false,
-      numberOfElements: 10,
-      empty: false,
-    };
+  it('getMovies() should call getMoviesList() and return data', waitForAsync(() => {
+    spyOn(movieService, 'getMoviesList')
+      .withArgs(
+        component.paginator.pageIndex,
+        component.filterWinner,
+        component.yearFilter
+      )
+      .and.returnValue(of(Movie_List_Dto_Mock));
 
+    component.getMovies();
+    fixture.detectChanges();
+
+    expect(component.movieListDto).toEqual(Movie_List_Dto_Mock);
+  }));
+
+  it('setPaginatorParameters() should set the paginator parameters', () => {
+    component.movieListDto = Movie_List_Dto_Mock;
     component.setPaginatorParameters();
 
     expect(component.paginator.length).toBe(206);
     expect(component.paginator.pageSize).toBe(10);
+
+    component.movieListDto = undefined;
+    component.setPaginatorParameters();
+
+    expect(component.paginator.length).toBe(0);
+    expect(component.paginator.pageSize).toBe(0);
+  });
+
+  it('handlePageEvent() should set paginator.pageIndex with value of pageEvent', () => {
+    const spyGetMovieList = spyOn(component, 'getMovies');
+    component.paginator = new Paginator();
+    let pageEvent = new PageEvent();
+    pageEvent.pageIndex = 1;
+
+    component.handlePageEvent(pageEvent);
+
+    expect(component.paginator.pageIndex).toBe(1);
+    expect(spyGetMovieList).toHaveBeenCalled();
+  });
+
+  it('winnerFilterChange() should set paginator.pageIndex and filterWinner with value of MatSelectChange', () => {
+    const spyGetMovieList = spyOn(component, 'getMovies');
+    component.paginator = new Paginator();
+    component.paginator.pageIndex = 0;
+
+    component.winnerFilterChange(FilterWinner.ALL);
+
+    expect(component.paginator.pageIndex).toBe(0);
+    expect(spyGetMovieList).toHaveBeenCalled();
+  });
+
+  it('applyYearFilter() should set the paginator parameters', () => {
+    const spyGetMovieList = spyOn(component, 'getMovies');
+
+    component.applyYearFilter(123);
+    expect(component.yearFilter).toBe(undefined);
+
+    component.applyYearFilter(1999);
+    expect(component.yearFilter).toBe(1999);
+
+    expect(spyGetMovieList).toHaveBeenCalled();
   });
 });

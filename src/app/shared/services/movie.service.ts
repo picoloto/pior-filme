@@ -13,18 +13,17 @@ import { Movie } from '../../model/movie.model';
   providedIn: 'root',
 })
 export class MovieService {
-  private projectionPath = '?projection=';
   constructor(private httpClient: HttpClient) {}
 
-  getListMovies(
+  getMoviesList(
     page: Number,
     filterWinner: FilterWinner,
     year?: Number
   ): Observable<MovieListDto> {
     const pagePath: String = `?page=${page}`;
     const sizePath: String = `&size=10`;
-    const yearPath: String = year ? `&year=${year}` : '';
     const winnerPath: String = this.getWinnerPath(filterWinner);
+    const yearPath: String = year ? `&year=${year}` : '';
 
     return this.httpClient.get<MovieListDto>(
       `${environment.apiUrl}${pagePath}${sizePath}${winnerPath}${yearPath}`
@@ -33,19 +32,19 @@ export class MovieService {
 
   getMultipleWinners(): Observable<MultipleWinnerListDto> {
     return this.httpClient.get<MultipleWinnerListDto>(
-      `${environment.apiUrl}${this.projectionPath}years-with-multiple-winners`
+      `${environment.apiUrl}${environment.projectionPath}years-with-multiple-winners`
     );
   }
 
   getTopStudiosWinners(): Observable<TopStudioWinnerListDto> {
     return this.httpClient.get<TopStudioWinnerListDto>(
-      `${environment.apiUrl}${this.projectionPath}studios-with-win-count`
+      `${environment.apiUrl}${environment.projectionPath}studios-with-win-count`
     );
   }
 
   getMinMaxWinProducers(): Observable<MaxMinWinProducersDto> {
     return this.httpClient.get<MaxMinWinProducersDto>(
-      `${environment.apiUrl}${this.projectionPath}max-min-win-interval-for-producers`
+      `${environment.apiUrl}${environment.projectionPath}max-min-win-interval-for-producers`
     );
   }
 
@@ -58,7 +57,7 @@ export class MovieService {
     );
   }
 
-  private getWinnerPath(filterWinner: FilterWinner): String {
+  getWinnerPath(filterWinner: FilterWinner): String {
     switch (filterWinner) {
       case FilterWinner.INDICATED:
         return `&winner=false`;
