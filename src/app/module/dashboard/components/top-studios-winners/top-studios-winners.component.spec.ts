@@ -1,8 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TopStudiosWinnersComponent } from './top-studios-winners.component';
 import { MovieService } from '../../../../shared/services/movie.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of } from 'rxjs';
+import { Top_Studios_winners_Mock } from '../../../../shared/mocks/top-studios-winners.mock';
 
 describe('TopStudiosWinnersComponent', () => {
   let component: TopStudiosWinnersComponent;
@@ -24,4 +26,16 @@ describe('TopStudiosWinnersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('getTopStudiosWinners() should call getTopStudiosWinners() and return data', waitForAsync(() => {
+    spyOn(movieListService, 'getTopStudiosWinners').and.returnValue(
+      of(Top_Studios_winners_Mock)
+    );
+    component.getTopStudiosWinners();
+    fixture.detectChanges();
+
+    expect(component.studioWinnerCount).toEqual(
+      Top_Studios_winners_Mock.studios.slice(0, 3)
+    );
+  }));
 });
