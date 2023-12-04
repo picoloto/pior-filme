@@ -9,7 +9,7 @@ import { Top_Studios_winners_Mock } from '../../../../shared/mocks/top-studios-w
 describe('TopStudiosWinnersComponent', () => {
   let component: TopStudiosWinnersComponent;
   let fixture: ComponentFixture<TopStudiosWinnersComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +19,7 @@ describe('TopStudiosWinnersComponent', () => {
     fixture = TestBed.createComponent(TopStudiosWinnersComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
     fixture.detectChanges();
   });
 
@@ -28,7 +28,7 @@ describe('TopStudiosWinnersComponent', () => {
   });
 
   it('getTopStudiosWinners() should call getTopStudiosWinners() and return data', waitForAsync(() => {
-    spyOn(movieListService, 'getTopStudiosWinners').and.returnValue(
+    spyOn(movieService, 'getTopStudiosWinners').and.returnValue(
       of(Top_Studios_winners_Mock)
     );
     component.getTopStudiosWinners();

@@ -9,7 +9,7 @@ import { Multiple_Winners_Mock } from '../../../../shared/mocks/multiple-winners
 describe('MultipleWinnersComponent', () => {
   let component: MultipleWinnersComponent;
   let fixture: ComponentFixture<MultipleWinnersComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +19,7 @@ describe('MultipleWinnersComponent', () => {
     fixture = TestBed.createComponent(MultipleWinnersComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
     fixture.detectChanges();
   });
 
@@ -28,7 +28,7 @@ describe('MultipleWinnersComponent', () => {
   });
 
   it('getMultipleWinnersList() should call getMultipleWinners() and return data', waitForAsync(() => {
-    spyOn(movieListService, 'getMultipleWinners').and.returnValue(
+    spyOn(movieService, 'getMultipleWinners').and.returnValue(
       of(Multiple_Winners_Mock)
     );
     component.getMultipleWinnersList();

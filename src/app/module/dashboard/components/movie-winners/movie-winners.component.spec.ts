@@ -10,7 +10,7 @@ import { Movie_Winner_By_Year_Mock } from '../../../../shared/mocks/movie-winner
 describe('MovieWinnersComponent', () => {
   let component: MovieWinnersComponent;
   let fixture: ComponentFixture<MovieWinnersComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe('MovieWinnersComponent', () => {
     fixture = TestBed.createComponent(MovieWinnersComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
     fixture.detectChanges();
   });
 
@@ -33,7 +33,7 @@ describe('MovieWinnersComponent', () => {
   });
 
   it('getMovieWinnerByYear() should call getMovieWinnerByYear() and return data', waitForAsync(() => {
-    spyOn(movieListService, 'getMovieWinnerByYear').and.returnValue(
+    spyOn(movieService, 'getMovieWinnerByYear').and.returnValue(
       of(Movie_Winner_By_Year_Mock)
     );
     component.getMovieWinnerByYear();

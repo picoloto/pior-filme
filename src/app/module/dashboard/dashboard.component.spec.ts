@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
     fixture.detectChanges();
   });
 

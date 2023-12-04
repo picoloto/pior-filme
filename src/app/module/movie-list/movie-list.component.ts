@@ -18,7 +18,6 @@ import { YearFilterComponent } from '../../shared/components/year-filter/year-fi
     MatSelectModule,
     YearFilterComponent,
   ],
-  providers: [MovieService],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss',
 })
@@ -46,7 +45,7 @@ export class MovieListComponent implements OnInit {
     this.applyYearFilter();
   }
 
-  getMovieList() {
+  getMovies(): void {
     this.movieService
       .getMoviesList(
         this.paginator.pageIndex,
@@ -55,7 +54,7 @@ export class MovieListComponent implements OnInit {
       )
       .subscribe((data: MovieListDto) => {
         this.movieListDto = data;
-        this.movieList = [...this.movieListDto.content];
+        this.movieList = this.movieListDto.content;
         this.setPaginatorParameters();
       });
   }
@@ -67,19 +66,19 @@ export class MovieListComponent implements OnInit {
 
   handlePageEvent(e: PageEvent) {
     this.paginator.pageIndex = e.pageIndex;
-    this.getMovieList();
+    this.getMovies();
   }
 
   applyYearFilter(filter?: number | undefined): void {
     this.yearFilter = filter?.toString().length === 4 ? filter : undefined;
-    this.getMovieList();
+    this.getMovies();
   }
 
-  winnerFilterChange(event: MatSelectChange) {
-    const filter: FilterWinner = event.value as FilterWinner;
+  winnerFilterChange(event: FilterWinner) {
+    const filter: FilterWinner = event;
     this.filterWinner = filter;
     this.paginator.pageIndex = 0;
 
-    this.getMovieList();
+    this.getMovies();
   }
 }

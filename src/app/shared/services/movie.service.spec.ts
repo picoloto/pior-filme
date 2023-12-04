@@ -36,10 +36,10 @@ describe('MovieService', () => {
   it('getMoviesList() should return data', () => {
     const pagePath: String = `?page=${0}`;
     const sizePath: String = `&size=10`;
-    const yearPath: String = '';
+    const yearPath: String = `&year=${1999}`;
     const winnerPath: String = '';
 
-    service.getMoviesList(0, FilterWinner.ALL).subscribe((res) => {
+    service.getMoviesList(0, FilterWinner.ALL, 1999).subscribe((res) => {
       expect(res).toEqual(Movie_List_Dto_Mock);
     });
 

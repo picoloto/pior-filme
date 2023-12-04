@@ -22,8 +22,8 @@ export class MovieService {
   ): Observable<MovieListDto> {
     const pagePath: String = `?page=${page}`;
     const sizePath: String = `&size=10`;
-    const yearPath: String = year ? `&year=${year}` : '';
     const winnerPath: String = this.getWinnerPath(filterWinner);
+    const yearPath: String = year ? `&year=${year}` : '';
 
     return this.httpClient.get<MovieListDto>(
       `${environment.apiUrl}${pagePath}${sizePath}${winnerPath}${yearPath}`

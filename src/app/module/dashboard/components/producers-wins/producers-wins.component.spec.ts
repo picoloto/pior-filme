@@ -9,7 +9,7 @@ import { Min_Max_Win_Producers_Mock } from '../../../../shared/mocks/min-max-win
 describe('ProducersWinsComponent', () => {
   let component: ProducersWinsComponent;
   let fixture: ComponentFixture<ProducersWinsComponent>;
-  let movieListService: MovieService;
+  let movieService: MovieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,7 +19,7 @@ describe('ProducersWinsComponent', () => {
     fixture = TestBed.createComponent(ProducersWinsComponent);
     component = fixture.componentInstance;
 
-    movieListService = TestBed.inject(MovieService);
+    movieService = TestBed.inject(MovieService);
     fixture.detectChanges();
   });
 
@@ -28,7 +28,7 @@ describe('ProducersWinsComponent', () => {
   });
 
   it('getMinMaxWinProducers() should call getMinMaxWinProducers() and return data', waitForAsync(() => {
-    spyOn(movieListService, 'getMinMaxWinProducers').and.returnValue(
+    spyOn(movieService, 'getMinMaxWinProducers').and.returnValue(
       of(Min_Max_Win_Producers_Mock)
     );
     component.getMinMaxWinProducers();
