@@ -3,6 +3,7 @@ import { MovieListComponent } from './movie-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MovieService } from '../../shared/services/movie.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('MovieListComponent', () => {
   let component: MovieListComponent;
@@ -11,13 +12,18 @@ describe('MovieListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MovieListComponent, HttpClientTestingModule],
+      imports: [
+        MovieListComponent,
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MovieListComponent);
     component = fixture.componentInstance;
 
     movieListService = TestBed.inject(MovieService);
+    fixture.detectChanges();
   });
 
   it('should create the MovieListComponent', () => {

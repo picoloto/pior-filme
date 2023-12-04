@@ -48,7 +48,7 @@ export class MovieListComponent implements OnInit {
 
   getMovieList() {
     this.movieService
-      .getListMovies(
+      .getMoviesList(
         this.paginator.pageIndex,
         this.filterWinner,
         this.yearFilter

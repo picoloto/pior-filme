@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { YearFilterComponent } from './year-filter.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('YearFilterComponent', () => {
   let component: YearFilterComponent;
@@ -8,10 +9,9 @@ describe('YearFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [YearFilterComponent]
-    })
-    .compileComponents();
-    
+      imports: [YearFilterComponent, BrowserAnimationsModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(YearFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
