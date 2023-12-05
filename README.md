@@ -30,3 +30,21 @@ Também foi criada uma camada chamada de compartilhamento (`shared`) que fica re
 Para ajudar na escalabilidade, foi criado um componente de `Filtro por ano`, que pode ser reutilizado em várias telas, como foi o caso do `Dashboard` e da `Listagem de filmes`.
 
 Para economizar tempo em estilização, foi utilizada a biblioteca de Material Design, onde utilizo alguns componentes, como, por exemplo, `Table` e `Input`.
+
+### Estrutura de arquivos
+
+```
+├── src
+│   ├── app
+│   │   ├── model
+│   │   ├── module
+│   │   │   ├── dashboard
+│   │   │   └── movie-list
+│   │   ├── service
+│   │   │   └── movie
+│   │   ├── shared
+│   │   │   ├── components
+│   │   │   ├── enums
+│   │   │   ├── environment
+│   │   │   └── mocks
+```
