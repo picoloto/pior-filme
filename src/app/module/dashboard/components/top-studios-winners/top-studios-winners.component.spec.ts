@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TopStudiosWinnersComponent } from './top-studios-winners.component';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { Top_Studios_winners_Mock } from '../../../../shared/mocks/top-studios-winners.mock';

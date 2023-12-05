@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { YearWinnerCount } from '../../../../model/multiple-winner-list-dto.model';
 import { map } from 'rxjs';
 

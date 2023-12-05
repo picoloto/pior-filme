@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ProducersWinsComponent } from './producers-wins.component';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { Min_Max_Win_Producers_Mock } from '../../../../shared/mocks/min-max-win-producers.mock';

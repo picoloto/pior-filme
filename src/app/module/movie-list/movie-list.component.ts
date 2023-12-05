@@ -3,7 +3,7 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { FilterWinner } from '../../shared/enums/filter-winner.enum';
-import { MovieService } from '../../shared/services/movie.service';
+import { MovieService } from '../../service/movie/movie.service';
 import { MovieListDto } from '../../model/movie-list-dto.model';
 import { Movie } from '../../model/movie.model';
 import { Paginator } from '../../model/paginator.model';

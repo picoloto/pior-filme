@@ -1,27 +1,32 @@
 # PiorFilme
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.5.
+Projeto Front End Angular cujo objetivo é listar os vencedores da categoria Pior Filme do Golden Raspberry Awards.
 
-## Development server
+### Especificações técnicas
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Angular 17.0.5
+- Node 21.3.0
+- NPM 10.2.4
 
-## Code scaffolding
+### Como rodar o projeto
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Clonar o repositório
+- Rodar o comando `npm install` para instalar as dependências
+- Rodar o comando `ng serve` para iniciar o projeto
+- Acesse o endereço `http://localhost:4200/
 
-## Build
+### Como testar o projeto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Rodar o comando `npm run test` para rodar e acompanhar os testes.
+- Rodar o comando `npm run test-coverage` para rodar os testes e verificar a cobertura
+  - A cobertura ficará disponível no arquivo `coverage/index.html`
 
-## Running unit tests
+### Arquitetura
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Esse projeto usa o padrão **MVC** de arquitetura, contando com uma camada de serviço (`service`), uma camada de domínio (`model`) e uma camada de apresentação (`module`) que foi dividida em módulos (funcionalidades) para facilitar uma possível escalabilidade do projeto.
 
-## Running end-to-end tests
+Também foi criada uma camada chamada de compartilhamento (`shared`) que fica responsável por armazenar os recursos (componentes, enums...) reutilizáveis.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Para ajudar na escalabilidade, foi criado um componente de `Filtro por ano`, que pode ser reutilizado em várias telas, como foi o caso do `Dashboard` e da `Listagem de filmes`.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para economizar tempo em estilização, foi utilizada a biblioteca de Material Design, onde utilizo alguns componentes, como, por exemplo, `Table` e `Input`.

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultipleWinnersComponent } from './multiple-winners.component';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 import { Multiple_Winners_Mock } from '../../../../shared/mocks/multiple-winners.mock';

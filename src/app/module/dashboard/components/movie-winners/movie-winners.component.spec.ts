@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MovieWinnersComponent } from './movie-winners.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 import { Movie_Winner_By_Year_Mock } from '../../../../shared/mocks/movie-winner-by-year.mock';

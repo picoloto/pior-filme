@@ -1,13 +1,13 @@
-import { FilterWinner } from '../enums/filter-winner.enum';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environment/envrironment';
 import { Observable } from 'rxjs';
 import { MovieListDto } from '../../model/movie-list-dto.model';
 import { MultipleWinnerListDto } from '../../model/multiple-winner-list-dto.model';
 import { TopStudioWinnerListDto } from '../../model/top-studio-winner-list-dto.model';
 import { MaxMinWinProducersDto } from '../../model/max-min-win-producers-dto.model';
 import { Movie } from '../../model/movie.model';
+import { FilterWinner } from '../../shared/enums/filter-winner.enum';
+import { environment } from '../../shared/environment/envrironment';
 
 @Injectable({
   providedIn: 'root',
