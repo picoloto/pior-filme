@@ -26,7 +26,7 @@ export class StructureComponent implements OnInit {
 
   menuItens = [
     { title: 'Dashboard', route: 'dashboard' },
-    { title: 'List', route: 'movie-list' },
+    { title: 'Lista de filmes', route: 'movie-list' },
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any) {}
