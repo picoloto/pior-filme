@@ -13,7 +13,7 @@ Projeto Front End Angular cujo objetivo é listar os vencedores da categoria Pio
 - Clonar o repositório
 - Rodar o comando `npm install` para instalar as dependências
 - Rodar o comando `ng serve` para iniciar o projeto
-- Acesse o endereço `http://localhost:4200/
+- Acesse o endereço http://localhost:4200/
 
 ### Como testar o projeto
 
