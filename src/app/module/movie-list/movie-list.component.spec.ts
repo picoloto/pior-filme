@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MovieListComponent } from './movie-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { MovieService } from '../../shared/services/movie.service';
+import { MovieService } from '../../service/movie/movie.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterWinner } from '../../shared/enums/filter-winner.enum';
 import { Paginator } from '../../model/paginator.model';

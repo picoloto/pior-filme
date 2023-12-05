@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Movie } from '../../../../model/movie.model';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import { MatTableModule } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
 import { MatInputModule } from '@angular/material/input';

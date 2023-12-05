@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MovieService } from '../../../../shared/services/movie.service';
+import { MovieService } from '../../../../service/movie/movie.service';
 import {
   MaxMinWinProducersDto,
   ProducerInterval,

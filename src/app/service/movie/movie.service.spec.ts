@@ -5,13 +5,13 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { environment } from '../environment/envrironment';
-import { Multiple_Winners_Mock } from '../mocks/multiple-winners.mock';
-import { Movie_Winner_By_Year_Mock } from '../mocks/movie-winner-by-year.mock';
-import { Top_Studios_winners_Mock } from '../mocks/top-studios-winners.mock';
-import { Min_Max_Win_Producers_Mock } from '../mocks/min-max-win-producers.mock';
-import { FilterWinner } from '../enums/filter-winner.enum';
-import { Movie_List_Dto_Mock } from '../mocks/movie-list-dto.mock';
+import { FilterWinner } from '../../shared/enums/filter-winner.enum';
+import { Movie_List_Dto_Mock } from '../../shared/mocks/movie-list-dto.mock';
+import { environment } from '../../shared/environment/envrironment';
+import { Multiple_Winners_Mock } from '../../shared/mocks/multiple-winners.mock';
+import { Top_Studios_winners_Mock } from '../../shared/mocks/top-studios-winners.mock';
+import { Min_Max_Win_Producers_Mock } from '../../shared/mocks/min-max-win-producers.mock';
+import { Movie_Winner_By_Year_Mock } from '../../shared/mocks/movie-winner-by-year.mock';
 
 describe('MovieService', () => {
   let service: MovieService;
